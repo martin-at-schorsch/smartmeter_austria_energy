@@ -72,3 +72,6 @@ Script was tested on Linux (Ubuntu, Debian, Raspberry OS) and Windows (Windows 1
 
 [github-address]: https://github.com/NECH2004/smartmeter_austria_energy/
 
+## Usage
+Credits to Stefan who had done a cool work that was used in this implementation.
+https://github.com/tirolerstefan/kaifa

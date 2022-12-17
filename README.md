@@ -1,4 +1,4 @@
-# Smartmeter Kaifa Austria
+# Smartmeter Energy Austria
 
 [![GitHub Release][releases-shield]][releases]
 [![License][license-shield]](LICENSE)
@@ -12,7 +12,7 @@
 [![Validate][validate-shield]][validation]
 [![Build Status][pypi-publish-shield]][pypi-publish]
 
-Library for connecting to Austrian Smart Meters of Salzburg Netz, TINETZ and NOE
+Library for connecting to Austrian Smart Meters of Salzburg Netz, TINETZ and EVN
 Retrieves the data from the M-BUS connector using a serial to USB converter.
 
 Only tested on a Kaifa MA309 and Salzburg Netz (Salzburg AG).
@@ -72,3 +72,6 @@ Script was tested on Linux (Ubuntu, Debian, Raspberry OS) and Windows (Windows 1
 
 [github-address]: https://github.com/NECH2004/smartmeter_austria_energy/
 
+## Usage
+Credits to Stefan who had done a cool work that was used in this implementation.
+https://github.com/tirolerstefan/kaifa

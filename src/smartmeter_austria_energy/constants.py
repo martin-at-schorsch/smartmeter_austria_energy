@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 # https://www.dlms.com/files/Blue-Book-Ed-122-Excerpt.pdf
 # define the data types
 class DataType:
@@ -28,12 +29,13 @@ class DataType:
     Structure = 0x02
     CompactArray = 0x13
 
-#https://www.dlms.com/files/Blue-Book-Ed-122-Excerpt.pdf
+
+# https://www.dlms.com/files/Blue-Book-Ed-122-Excerpt.pdf
 # defines the physical units of the data
 class PhysicalUnits(Enum):
     Undef = 0x00
-    
-    W = 0x1B # 27
+
+    W = 0x1B  # 27
     VA = 0x1C
     var = 0x1D
     Wh = 0x1E
@@ -42,6 +44,5 @@ class PhysicalUnits(Enum):
     A = 0x21
     C = 0x22
     V = 0x23
-    
+
     Hz = 0x2C
-    

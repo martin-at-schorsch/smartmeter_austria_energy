@@ -22,85 +22,93 @@ _supplied_values : list[str] = [
     "Factor"
 ]
 
+
 def test_Suppliers_EVN():
     """Test the Suppliers dict."""
     # arrange
     # act
     my_supplier = SUPPLIERS[SUPPLIER_EVN_NAME]
-    
+
     # assert
-    assert isinstance(my_supplier, SupplierEVN) 
+    assert isinstance(my_supplier, SupplierEVN)
+
 
 def test_Suppliers_SalzburgNetz():
     """Test the Suppliers dict."""
     # arrange
     # act
     my_supplier = SUPPLIERS[SUPPLIER_SALZBURGNETZ_NAME]
-    
+
     # assert
-    assert isinstance(my_supplier, SupplierSALZBURGNETZ) 
+    assert isinstance(my_supplier, SupplierSALZBURGNETZ)
+
 
 def test_Suppliers_TINETZ():
     """Test the Suppliers dict."""
     # arrange
     # act
     my_supplier = SUPPLIERS[SUPPLIER_TINETZ_NAME]
-    
+
     # assert
-    assert isinstance(my_supplier, SupplierTINETZ) 
+    assert isinstance(my_supplier, SupplierTINETZ)
+
 
 def test_Suppliers_EVN_inheritance():
     """Test the SupplierEVN class for inheritance."""
     # arrange
     # act
     my_supplier = SupplierEVN()
-    
+
     # assert
-    assert isinstance(my_supplier, Supplier) 
+    assert isinstance(my_supplier, Supplier)
+
 
 def test_Suppliers_SalzburgNETZ_inheritance():
     """Test the SupplierSALZBURGNETZ class for inheritance."""
     # arrange
     # act
     my_supplier = SupplierSALZBURGNETZ()
-    
+
     # assert
-    assert isinstance(my_supplier, SupplierTINETZ) 
-    assert isinstance(my_supplier, Supplier) 
+    assert isinstance(my_supplier, SupplierTINETZ)
+    assert isinstance(my_supplier, Supplier)
+
 
 def test_Suppliers_TINETZ_inheritance():
     """Test the SupplierTINETZ class for inheritance."""
     # arrange
     # act
     my_supplier = SupplierTINETZ()
-    
+
     # assert
-    assert isinstance(my_supplier, Supplier) 
+    assert isinstance(my_supplier, Supplier)
+
 
 def test_Supplier():
     """Test the Supplier class."""
-    
+
     # arrange
     # act
-    my_supplier = Supplier();
-    
+    my_supplier = Supplier()
+
     # assert
-    assert my_supplier.name == None
-    assert my_supplier.ic_start_byte == None
-    assert my_supplier.enc_data_start_byte == None
+    assert my_supplier.name is None
+    assert my_supplier.ic_start_byte is None
+    assert my_supplier.enc_data_start_byte is None
 
     assert my_supplier.frame1_start_bytes_hex == _frame1_start_bytes_hex
     assert my_supplier.frame1_start_bytes == _frame1_start_bytes
-    assert my_supplier.frame2_end_bytes  == _frame2_end_bytes
+    assert my_supplier.frame2_end_bytes == _frame2_end_bytes
     assert my_supplier.supplied_values == _supplied_values
+
 
 def test_SupplierEVN():
     """Test the SupplierEVN class."""
-    
+
     # arrange
     # act
-    my_supplier = SupplierEVN();
-    
+    my_supplier = SupplierEVN()
+
     # assert
     assert my_supplier.name == "EVN"
     assert my_supplier.ic_start_byte == 22
@@ -108,19 +116,20 @@ def test_SupplierEVN():
 
     assert my_supplier.frame1_start_bytes_hex == _frame1_start_bytes_hex
     assert my_supplier.frame1_start_bytes == _frame1_start_bytes
-    assert my_supplier.frame2_end_bytes  == _frame2_end_bytes
+    assert my_supplier.frame2_end_bytes == _frame2_end_bytes
     assert my_supplier.supplied_values == _supplied_values
-    
+
     assert my_supplier.frame2_start_bytes_hex == '68141468'
     assert my_supplier.frame2_start_bytes == b'\x68\x14\x14\x68'
 
+
 def test_SupplierTINETZ():
     """Test the SupplierTINETZ class."""
-    
+
     # arrange
     # act
-    my_supplier = SupplierTINETZ();
-    
+    my_supplier = SupplierTINETZ()
+
     # assert
     assert my_supplier.name == "TINETZ"
     assert my_supplier.ic_start_byte == 23
@@ -128,19 +137,20 @@ def test_SupplierTINETZ():
 
     assert my_supplier.frame1_start_bytes_hex == _frame1_start_bytes_hex
     assert my_supplier.frame1_start_bytes == _frame1_start_bytes
-    assert my_supplier.frame2_end_bytes  == _frame2_end_bytes
+    assert my_supplier.frame2_end_bytes == _frame2_end_bytes
     assert my_supplier.supplied_values == _supplied_values
-    
+
     assert my_supplier.frame2_start_bytes_hex == '68727268'
     assert my_supplier.frame2_start_bytes == b'\x68\x72\x72\x68'
 
+
 def test_SupplierSALZBURGNETZ():
     """Test the SupplierSALZBURGNETZ class."""
-    
+
     # arrange
     # act
-    my_supplier = SupplierSALZBURGNETZ();
-    
+    my_supplier = SupplierSALZBURGNETZ()
+
     # assert
     assert my_supplier.name == "SALZBURGNETZ"
     assert my_supplier.ic_start_byte == 23
@@ -148,8 +158,8 @@ def test_SupplierSALZBURGNETZ():
 
     assert my_supplier.frame1_start_bytes_hex == _frame1_start_bytes_hex
     assert my_supplier.frame1_start_bytes == _frame1_start_bytes
-    assert my_supplier.frame2_end_bytes  == _frame2_end_bytes
+    assert my_supplier.frame2_end_bytes == _frame2_end_bytes
     assert my_supplier.supplied_values == _supplied_values
-    
+
     assert my_supplier.frame2_start_bytes_hex == '68727268'
     assert my_supplier.frame2_start_bytes == b'\x68\x72\x72\x68'

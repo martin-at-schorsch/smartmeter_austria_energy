@@ -2,6 +2,7 @@ from .constants import PhysicalUnits
 from .decrypt import Decrypt
 from .obisvalue import ObisValue
 
+
 class ObisData():
     def __init__(self, dec: Decrypt, wanted_values: list[str]) -> None:
         self._voltageL1 = ObisValue(0, PhysicalUnits.V)
@@ -19,14 +20,15 @@ class ObisData():
 
         for key in wanted_values:
             myValue = dec.get_obis_value(key)
-            
+
             if (hasattr(self, key)):
                 setattr(self, key, myValue)
-        
+
     # Voltage
     @property
     def VoltageL1(self) -> ObisValue:
         return self._voltageL1
+
     @VoltageL1.setter
     def VoltageL1(self, voltageL1):
         self._voltageL1 = voltageL1
@@ -34,6 +36,7 @@ class ObisData():
     @property
     def VoltageL2(self) -> ObisValue:
         return self._voltageL2
+
     @VoltageL2.setter
     def VoltageL2(self, voltageL2):
         self._voltageL2 = voltageL2
@@ -41,14 +44,16 @@ class ObisData():
     @property
     def VoltageL3(self) -> ObisValue:
         return self._voltageL3
+
     @VoltageL3.setter
     def VoltageL3(self, voltageL3):
         self._voltageL3 = voltageL3
 
-    #Current
+    # Current
     @property
     def CurrentL1(self) -> ObisValue:
         return self._currentL1
+
     @CurrentL1.setter
     def CurrentL1(self, currentL1):
         self._currentL1 = currentL1
@@ -56,6 +61,7 @@ class ObisData():
     @property
     def CurrentL2(self) -> ObisValue:
         return self._currentL2
+
     @CurrentL2.setter
     def CurrentL2(self, currentL2):
         self._currentL2 = currentL2
@@ -63,15 +69,16 @@ class ObisData():
     @property
     def CurrentL3(self) -> ObisValue:
         return self._currentL3
+
     @CurrentL3.setter
     def CurrentL3(self, currentL3):
         self._currentL3 = currentL3
-
 
     # Power
     @property
     def RealPowerIn(self) -> ObisValue:
         return self._realPowerIn
+
     @RealPowerIn.setter
     def RealPowerIn(self, realPowerIn):
         self._realPowerIn = realPowerIn
@@ -79,15 +86,16 @@ class ObisData():
     @property
     def RealPowerOut(self) -> ObisValue:
         return self._realPowerOut
+
     @RealPowerOut.setter
     def RealPowerOut(self, realPowerOut):
         self._realPowerOut = realPowerOut
-
 
     # Energy
     @property
     def RealEnergyIn(self) -> ObisValue:
         return self._realEnergyIn
+
     @RealEnergyIn.setter
     def RealEnergyIn(self, realEnergyIn):
         self._realEnergyIn = realEnergyIn
@@ -95,6 +103,7 @@ class ObisData():
     @property
     def RealEnergyOut(self) -> ObisValue:
         return self._realEnergyOut
+
     @RealEnergyOut.setter
     def RealEnergyOut(self, realEnergyOut):
         self._realEnergyOut = realEnergyOut
@@ -102,6 +111,7 @@ class ObisData():
     @property
     def ReactiveEnergyIn(self) -> ObisValue:
         return self._reactiveEnergyIn
+
     @ReactiveEnergyIn.setter
     def ReactiveEnergyIn(self, reactiveEnergyIn):
         self._reactiveEnergyIn = reactiveEnergyIn
@@ -109,6 +119,7 @@ class ObisData():
     @property
     def ReactiveEnergyOut(self) -> ObisValue:
         return self._reactiveEnergyOut
+
     @ReactiveEnergyOut.setter
     def ReactiveEnergyOut(self, reactiveEnergyOut):
         self._reactiveEnergyOut = reactiveEnergyOut

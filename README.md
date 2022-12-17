@@ -12,7 +12,7 @@
 [![Validate][validate-shield]][validation]
 [![Build Status][pypi-publish-shield]][pypi-publish]
 
-Library for connecting to Austrian Smart Meters of Salzburg Netz, TINETZ and NOE
+Library for connecting to Austrian Smart Meters of Salzburg Netz, TINETZ and EVN
 Retrieves the data from the M-BUS connector using a serial to USB converter.
 
 Only tested on a Kaifa MA309 and Salzburg Netz (Salzburg AG).

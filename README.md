@@ -1,4 +1,4 @@
-# Smartmeter Kaifa Austria
+# Smartmeter Energy Austria
 
 [![GitHub Release][releases-shield]][releases]
 [![License][license-shield]](LICENSE)

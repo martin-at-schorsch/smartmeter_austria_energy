@@ -1,6 +1,8 @@
+import binascii
 import re
 import serial
-import binascii
+from serial.serialutil import (SerialException, SerialTimeoutException)
+from .exceptions import SmartmeterException, SmartmeterSerialException, SmartmeterTimeoutException
 from .supplier import SUPPLIERS
 from .decrypt import Decrypt
 from .obisdata import ObisData
@@ -50,13 +52,7 @@ class Smartmeter():
 
     # read method was mainly taken from https://github.com/tirolerstefan/kaifa
     def read(self) -> None:
-        self._mySerial = serial.Serial(
-            port=self._port,
-            baudrate=self._baudrate,
-            parity=self._parity,
-            stopbits=self._stopbits,
-            bytesize=self._bytesize,
-            timeout=self._interval)
+        self.__open_serial()
 
         supplier = SUPPLIERS.get(self._supplier_name)
         self._is_running = self._mySerial.isOpen()
@@ -118,4 +114,26 @@ class Smartmeter():
 
         self.obisData = ObisData(dec, supplier.supplied_values)
 
-        self._mySerial.close()
+        self.__close_serial()
+
+    def __open_serial(self):
+        try:
+            self._mySerial = serial.Serial(
+                port=self._port,
+                baudrate=self._baudrate,
+                parity=self._parity,
+                stopbits=self._stopbits,
+                bytesize=self._bytesize,
+                timeout=self._interval)
+        except SerialTimeoutException as ex:
+            raise SmartmeterTimeoutException(f"'{self._port}' has a timeout.") from ex
+        except SerialException as ex:
+            raise SmartmeterSerialException(f"'{self._port}' cannot be opened.") from ex
+        except Exception as ex:
+            raise SmartmeterException(f"Connection to '{self._port}' failed.") from ex
+
+    def __close_serial(self):
+        try:
+            self._mySerial.close()
+        except Exception as ex:
+            raise SmartmeterException(f"Closing port '{self._port}' failed.") from ex

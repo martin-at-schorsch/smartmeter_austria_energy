@@ -98,16 +98,16 @@ class Smartmeter():
 
                 # we have found at least two complete telegrams
                 regex = binascii.unhexlify('28' + supplier.frame1_start_bytes_hex + '7c' + supplier.frame2_start_bytes_hex + '29')  # re = '(..|..)'
-                list = re.split(regex, stream)
-                list = list(filter(None, list))  # remove empty elements
+                my_list = re.split(regex, stream)
+                my_list = list(filter(None, my_list))  # remove empty elements
                 # l after split (here in following example in hex)
                 # l = ['68fafa68', '53ff00...faecc16', '68727268', '53ff...3d16', '68fafa68', '53ff...d916', '68727268', '53ff.....']
 
                 # take the first two matching telegrams
-                for i, el in enumerate(list):
+                for i, el in enumerate(my_list):
                     if el == supplier.frame1_start_bytes:
-                        frame1 = list[i] + list[i + 1]
-                        frame2 = list[i + 2] + list[i + 3]
+                        frame1 = my_list[i] + my_list[i + 1]
+                        frame2 = my_list[i + 2] + my_list[i + 3]
                         break
 
                 # check for weird result -> exit

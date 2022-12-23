@@ -64,6 +64,8 @@ class Smartmeter():
         frame1_start_pos = -1          # pos of start bytes of telegram 1 (in stream)
         frame2_start_pos = -1          # pos of start bytes of telegram 2 (in stream)
 
+        timeout_counter = 0
+        
         # "telegram fetching loop" (as long as we have found two full telegrams)
         # frame1 = first telegram (68fafa68), frame2 = second telegram (68727268)
         while self._is_running:
@@ -80,8 +82,13 @@ class Smartmeter():
                     or (stream.find(supplier.frame2_start_bytes) <= 0)
                     or (stream[-1:] != supplier.frame2_end_bytes)
                     or (len(byte_chunk) == self._serial_read_chunk_size)):
-                continue
-
+                if (timeout_counter < 15):
+                    timeout_counter+=1              
+                    continue
+                else:
+                    raise SmartmeterTimeoutException()
+            
+            timeout_counter = 0
             if (frame2_start_pos != -1):
                 # frame2_start_pos could be smaller than frame1_start_pos
                 if frame2_start_pos < frame1_start_pos:

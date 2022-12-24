@@ -19,8 +19,9 @@ _supplied_values : list[str] = [
     "RealEnergyOut",
     "ReactiveEnergyIn",
     "ReactiveEnergyOut",
-    "Factor"
-]
+    "Factor",
+    "DeviceNumber",
+    "LogicalDeviceNumber"]
 
 
 def test_Suppliers_EVN():

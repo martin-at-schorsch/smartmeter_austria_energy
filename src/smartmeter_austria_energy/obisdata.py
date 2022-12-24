@@ -17,6 +17,8 @@ class ObisData():
         self._realEnergyOut = ObisValue(0, PhysicalUnits.Wh)
         self._reactiveEnergyIn = ObisValue(0, PhysicalUnits.varh)
         self._reactiveEnergyOut = ObisValue(0, PhysicalUnits.varh)
+        self._deviceNumber = ObisValue(0)
+        self._logicalDeviceNumber = ObisValue(0)
 
         for key in wanted_values:
             myValue = dec.get_obis_value(key)
@@ -123,3 +125,18 @@ class ObisData():
     @ReactiveEnergyOut.setter
     def ReactiveEnergyOut(self, reactiveEnergyOut):
         self._reactiveEnergyOut = reactiveEnergyOut
+
+    # Device
+    @property
+    def DeviceNumber(self) -> ObisValue:
+        return self._deviceNumber
+    @DeviceNumber.setter
+    def DeviceNumber(self, deviceNumber):
+        self._deviceNumber = deviceNumber
+
+    @property
+    def LogicalDeviceNumber(self) -> ObisValue:
+        return self._logicalDeviceNumber
+    @LogicalDeviceNumber.setter
+    def LogicalDeviceNumber(self, logicalDeviceNumber):
+        self._logicalDeviceNumber = logicalDeviceNumber

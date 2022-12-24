@@ -92,3 +92,17 @@ class Obis:
         "unit": "",
         "mod": "round(self.obis[d['byte']],3)",
     }
+    DeviceNumber = {
+        "pos": "96.1.0",
+        "byte": to_bytes("0.0.96.1.0.255"),
+        "desc_name": "DeviceNumber",
+        "unit": "",
+        "mod": None,
+    }
+    LogicalDeviceNumber = {
+        "pos": "42.0.0",
+        "byte": to_bytes("0.0.42.0.0.255"),
+        "desc_name": "LogicalDeviceNumber",
+        "unit": "",
+        "mod": None,
+    }

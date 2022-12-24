@@ -18,7 +18,9 @@ class Supplier:
         "RealEnergyOut",
         "ReactiveEnergyIn",
         "ReactiveEnergyOut",
-        "Factor"]
+        "Factor",
+        "DeviceNumber",
+        "LogicalDeviceNumber"]
 
 
 class SupplierTINETZ(Supplier):
@@ -42,7 +44,7 @@ class SupplierSALZBURGNETZ(SupplierTINETZ):
 
 
 SUPPLIER_EVN_NAME = "EVN"
-SUPPLIER_SALZBURGNETZ_NAME = "SalzburgNetz"
+SUPPLIER_SALZBURGNETZ_NAME = "SALZBURGNETZ"
 SUPPLIER_TINETZ_NAME = "TINETZ"
 
 SUPPLIERS = {

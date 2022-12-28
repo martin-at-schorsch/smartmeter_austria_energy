@@ -3,7 +3,7 @@ from Crypto.Cipher import AES
 from .obis import Obis
 from .supplier import Supplier
 from .constants import DataType, PhysicalUnits
-from .obisvalue import ObisValue
+from .obisvalue import ObisValueFloat, ObisValueString
 
 
 # decryption class was mainly taken from and credits to https://github.com/tirolerstefan/kaifa
@@ -51,7 +51,7 @@ class Decrypt:
                 pos += 2 + 8
                 self.obis[obis_code] = value * (10**scale)
 
-                self.obis_values[obis_code] = ObisValue(value, PhysicalUnits(unit), scale)
+                self.obis_values[obis_code] = ObisValueFloat(value, PhysicalUnits(unit), scale)
             elif data_type == DataType.LongUnsigned:
                 value = int.from_bytes(decrypted[pos : pos + 2], "big")
                 scale = decrypted[pos + 2 + 3]
@@ -61,16 +61,16 @@ class Decrypt:
                 pos += 8
                 self.obis[obis_code] = value * (10**scale)
 
-                self.obis_values[obis_code] = ObisValue(value, PhysicalUnits(unit), scale)
+                self.obis_values[obis_code] = ObisValueFloat(value, PhysicalUnits(unit), scale)
             elif data_type == DataType.OctetString:
                 octet_len = decrypted[pos]
                 octet = decrypted[pos + 1 : pos + 1 + octet_len]
                 pos += 1 + octet_len + 2
                 self.obis[obis_code] = octet
 
-                self.obis_values[obis_code] = ObisValue(octet)
+                self.obis_values[obis_code] = ObisValueString(octet)
 
-    def get_obis_value(self, name) -> ObisValue:
+    def get_obis_value(self, name) -> ObisValueFloat | ObisValueString:
         d = getattr(Obis, name)
         if d['byte'] in self.obis_values:
             data = self.obis_values[d['byte']]

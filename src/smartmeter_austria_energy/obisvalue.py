@@ -1,12 +1,27 @@
+import math
 from .constants import PhysicalUnits
 
 
 class ObisValueFloat():
-    def __init__(self, raw_value: float, unit: PhysicalUnits = PhysicalUnits(0), scale: int = 1) -> None:
+    def __init__(self, raw_value: float, unit: PhysicalUnits = PhysicalUnits(0), scale: int = 0) -> None:
         self._raw_value = raw_value
         self._scale = scale
         self._unit = unit
 
+    def __add__(self, other):
+        if (self.Unit == other.Unit):
+            x = self.Value + other.Value
+            return ObisValueFloat(x, self.Unit)
+        else:
+            return ObisValueFloat(math.nan)
+
+    def __sub__(self, other):
+        if (self.Unit == other.Unit):
+            x = self.Value - other.Value
+            return ObisValueFloat(x, self.Unit)
+        else:
+            return ObisValueFloat(math.nan)
+        
     @property
     def RawValue(self) -> float:
         return self._raw_value
@@ -25,7 +40,7 @@ class ObisValueFloat():
 
     @property
     def ValueString(self) -> str:
-        return "{} {}".format(self.Value, self.Unit.name)
+        return f"{self.Value} {self.Unit.name}"
 
 
 class ObisValueString():

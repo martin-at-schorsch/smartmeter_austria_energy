@@ -93,6 +93,11 @@ class ObisData():
     def RealPowerOut(self, realPowerOut):
         self._realPowerOut = realPowerOut
 
+    # Calculated power property
+    @property
+    def RealPowerDelta(self) -> ObisValueFloat:
+        return self._realPowerIn - self._realPowerOut
+
     # Energy
     @property
     def RealEnergyIn(self) -> ObisValueFloat:

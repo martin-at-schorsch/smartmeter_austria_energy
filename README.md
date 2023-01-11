@@ -41,8 +41,8 @@ def main():
     g_smartmeter.read()
     my_obisdata = g_smartmeter.obisData
 
-    print("RealEnergyIn: {}".format(my_obisdata.RealEnergyIn.ValueString))
-    print("RealEnergyOut: {}".format(my_obisdata.RealEnergyOut.ValueString))
+    print(f"RealEnergyIn: {my_obisdata.RealEnergyIn.ValueString}")
+    print(f"RealEnergyOut: {my_obisdata.RealEnergyOut.ValueString}")
  
 if __name__ == '__main__':
     main()

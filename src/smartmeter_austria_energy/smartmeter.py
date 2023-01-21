@@ -51,7 +51,7 @@ class Smartmeter():
         self.is_running = False
 
     # read method was mainly taken from https://github.com/tirolerstefan/kaifa
-    def read(self) -> None:
+    async def read(self) -> None:
         self.__open_serial()
 
         supplier = SUPPLIERS.get(self._supplier_name)

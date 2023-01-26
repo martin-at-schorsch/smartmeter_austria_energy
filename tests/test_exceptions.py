@@ -1,3 +1,5 @@
+"""Tests the exception classes."""
+
 from src.smartmeter_austria_energy.exceptions import (SmartmeterException, SmartmeterSerialException, SmartmeterTimeoutException)
 
 

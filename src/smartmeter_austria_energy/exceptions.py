@@ -1,3 +1,5 @@
+"""Definition of Smartmeter Austria Energy exceptions."""
+
 class SmartmeterException(Exception):
     """General problem.
     Possible causes:

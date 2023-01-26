@@ -1,3 +1,5 @@
+"""Defines value objects for OBIS data."""
+
 import math
 from .constants import PhysicalUnits
 

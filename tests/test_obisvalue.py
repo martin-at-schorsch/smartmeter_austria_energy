@@ -1,3 +1,5 @@
+"""Tests the obisvalue classes."""
+
 import math
 from src.smartmeter_austria_energy.constants import (PhysicalUnits)
 from src.smartmeter_austria_energy.obisvalue import (ObisValueFloat, ObisValueString)

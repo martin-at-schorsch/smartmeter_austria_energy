@@ -1,3 +1,5 @@
+"""Define constants for Smartmeter Austria Energy integration."""
+
 from enum import Enum
 
 

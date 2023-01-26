@@ -1,5 +1,6 @@
 from .constants import PhysicalUnits
 from .decrypt import Decrypt
+from .eventtypes import EventArgs
 from .obisvalue import ObisValueFloat, ObisValueString
 
 
@@ -17,8 +18,8 @@ class ObisData():
         self._realEnergyOut = ObisValueFloat(0, PhysicalUnits.Wh)
         self._reactiveEnergyIn = ObisValueFloat(0, PhysicalUnits.varh)
         self._reactiveEnergyOut = ObisValueFloat(0, PhysicalUnits.varh)
-        self._deviceNumber = ObisValueFloat(0)
-        self._logicalDeviceNumber = ObisValueFloat(0)
+        self._deviceNumber = ObisValueString("")
+        self._logicalDeviceNumber = ObisValueString("")
 
         for key in wanted_values:
             myValue = dec.get_obis_value(key)
@@ -145,3 +146,15 @@ class ObisData():
     @LogicalDeviceNumber.setter
     def LogicalDeviceNumber(self, logicalDeviceNumber):
         self._logicalDeviceNumber = logicalDeviceNumber
+
+
+class ObisDataEventArgs(EventArgs):
+    def __init__(self, data: ObisData) -> None:
+        self._data = data
+
+    @property
+    def obisdata(self) -> ObisData:
+        return self._data
+    @obisdata.setter
+    def obisdata(self, data):
+        self._data = data

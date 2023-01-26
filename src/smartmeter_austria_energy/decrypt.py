@@ -1,3 +1,5 @@
+"""Decrypts the smartmeter response frames."""
+
 import binascii
 from Crypto.Cipher import AES
 from .obis import Obis

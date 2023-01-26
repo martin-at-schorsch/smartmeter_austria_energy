@@ -1,3 +1,5 @@
+"""Supplier classes tests."""
+
 from src.smartmeter_austria_energy.supplier import (
     Supplier, SUPPLIERS,
     SupplierEVN, SupplierSALZBURGNETZ, SupplierTINETZ,

@@ -37,9 +37,9 @@ def main():
     key_hex_string = "-- this is your key --"
     port = "COM5"
 
-    g_smartmeter = Smartmeter(supplier_name, port, key_hex_string)
-    g_smartmeter.read()
-    my_obisdata = g_smartmeter.obisData
+    smartmeter = Smartmeter(supplier_name, port, key_hex_string)
+    obisdata = await smartmeter.async_read_once()
+    smartmeter.close()
 
     print(f"RealEnergyIn: {my_obisdata.RealEnergyIn.ValueString}")
     print(f"RealEnergyOut: {my_obisdata.RealEnergyOut.ValueString}")

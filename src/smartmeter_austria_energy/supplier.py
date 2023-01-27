@@ -1,5 +1,6 @@
 """Classes used to define suppliers."""
 
+
 class Supplier:
     name : str = None
     frame1_start_bytes_hex : str = '68fafa68'

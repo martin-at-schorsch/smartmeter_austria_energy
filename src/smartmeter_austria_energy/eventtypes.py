@@ -1,7 +1,9 @@
 """Defines several objects around events."""
 
+
 class EventArgs():
     None
+
 
 class DerivedEventArgs(EventArgs):
     def __init__(self, speed: int) -> None:
@@ -11,6 +13,7 @@ class DerivedEventArgs(EventArgs):
     @property
     def is_derived(self):
         return self._is_derived
+
     @is_derived.setter
     def is_derived(self, new_is_derived):
         self._is_derived = new_is_derived
@@ -18,9 +21,11 @@ class DerivedEventArgs(EventArgs):
     @property
     def Speed(self) -> int:
         return self._speed
+
     @Speed.setter
     def Speed(self, new_speed):
         self._speed = new_speed
+
 
 class Event(object):
     def __init__(self):

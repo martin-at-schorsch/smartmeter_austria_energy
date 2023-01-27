@@ -1,9 +1,15 @@
 """Supplier classes tests."""
 
 from src.smartmeter_austria_energy.supplier import (
-    Supplier, SUPPLIERS,
-    SupplierEVN, SupplierSALZBURGNETZ, SupplierTINETZ,
-    SUPPLIER_EVN_NAME, SUPPLIER_SALZBURGNETZ_NAME, SUPPLIER_TINETZ_NAME)
+    SUPPLIER_EVN_NAME,
+    SUPPLIER_SALZBURGNETZ_NAME,
+    SUPPLIER_TINETZ_NAME,
+    SUPPLIERS,
+    Supplier,
+    SupplierEVN,
+    SupplierSALZBURGNETZ,
+    SupplierTINETZ,
+)
 
 _frame1_start_bytes_hex : str = '68fafa68'
 _frame1_start_bytes : bytes = b'\x68\xfa\xfa\x68'  # 68 FA FA 68

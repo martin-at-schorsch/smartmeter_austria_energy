@@ -4,17 +4,25 @@ import asyncio
 import binascii
 import logging
 import re
-import serial
 import threading
 import time
-from serial.serialutil import (SerialException, SerialTimeoutException)
-from .exceptions import SmartmeterException, SmartmeterSerialException, SmartmeterTimeoutException
-from .supplier import SUPPLIERS
+
+import serial
+from serial.serialutil import SerialException, SerialTimeoutException
+
 from .decrypt import Decrypt
-from .obisdata import ObisData, ObisDataEventArgs
 from .eventtypes import Event
+from .exceptions import (
+    SmartmeterException,
+    SmartmeterSerialException,
+    SmartmeterTimeoutException,
+)
+from .obisdata import ObisData, ObisDataEventArgs
+from .supplier import SUPPLIERS
+
 
 class Smartmeter():
+    """Connects and reads data from the smartmeter."""
     def __init__(self,
                  supplier_name: str,
                  port: str,
@@ -41,7 +49,7 @@ class Smartmeter():
         self._obisData : ObisData = None
         self._obisdata_changed : Event = Event()
         self._read_thread : threading.Thread = None
-        
+
         self._logger = logging.getLogger(__name__)
         self._is_running: bool = False
         self._ex: Exception = None
@@ -58,18 +66,18 @@ class Smartmeter():
     def __obisData(self, obisData):
         if (self._obisData != obisData):
             eventArgs = ObisDataEventArgs(obisData)
-            if (self._obisdata_changed != None):
+            if (self._obisdata_changed is not None):
                 self._obisdata_changed.notify(sender=self, args=eventArgs)
             self._obisData = obisData
 
     @property
     def obisdata_changed(self) -> Event:
         return self._obisdata_changed
-    
+
     @obisdata_changed.setter
     def obisdata_changed(self, obisdata_changed):
         self._obisdata_changed = obisdata_changed
-    
+
     def close(self) -> None:
         self._is_running = False
 
@@ -82,7 +90,7 @@ class Smartmeter():
         obisdata = await self.__async_read(supplier)
         self.__close_serial()
         return obisdata
-        
+
     def start_reading(self) -> None:
         self._logger.debug("Try to start reading.")
         self._ex = None
@@ -100,7 +108,7 @@ class Smartmeter():
 
     def __start_read(self) -> None:
         asyncio.run(self.__async_read_wrapper())
-    
+
     async def __async_read_wrapper(self) -> None:
         try:
             await self.__async_read_loop()
@@ -108,13 +116,11 @@ class Smartmeter():
             self._ex = ex
             self._is_running = False
             self.__close_serial()
-        
+
     # read method was mainly taken from https://github.com/tirolerstefan/kaifa
     async def __async_read_loop(self) -> None:
         self.__open_serial()
-       
         self._is_running = self._mySerial.isOpen()
-
         self._logger.debug("Start reading from serial.")
 
         supplier = SUPPLIERS.get(self._supplier_name)
@@ -122,20 +128,20 @@ class Smartmeter():
         # outer loop
         while self._is_running:
             start = time.monotonic()
-            
+
             obisdata = await self.__async_read(supplier)
             self.__obisData = obisdata
-            
+
             end = time.monotonic()
             needed = end - start
             self._logger.debug(f"Needed {needed} s for OBIS data.")
 
             sleep_time = self._interval - needed
             if (sleep_time < 0):
-                sleep_time = 0;
+                sleep_time = 0
 
             await asyncio.sleep(sleep_time)
-        
+
         self.__close_serial()
 
     # read one pair of frames
@@ -177,7 +183,7 @@ class Smartmeter():
                     continue
                 else:
                     raise SmartmeterTimeoutException()
-            
+
             if (frame2_start_pos != -1):
                 # frame2_start_pos could be smaller than frame1_start_pos
                 if frame2_start_pos < frame1_start_pos:
@@ -208,7 +214,7 @@ class Smartmeter():
                     self.is_running = False
 
                 break
-        
+
         # If we are stopped do not parse.
         if (self._is_running):
             self._logger.debug("Next step is decrypting.")
@@ -224,8 +230,6 @@ class Smartmeter():
 
             return obisdata
         return None
-            
-        
 
     def __open_serial(self) -> None:
         try:
@@ -238,7 +242,7 @@ class Smartmeter():
                 timeout=self._timeout)
         except SerialTimeoutException as ex:
             self._logger.debug("Timeout happened at closing.")
-            raise SmartmeterTimeoutException(f"'{self._port}' has a timeout.")  from ex
+            raise SmartmeterTimeoutException(f"'{self._port}' has a timeout.") from ex
         except SerialException as ex:
             self._logger.debug("SerialException happened at closing.")
             raise SmartmeterSerialException(f"'{self._port}' cannot be opened.") from ex

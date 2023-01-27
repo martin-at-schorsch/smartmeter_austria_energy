@@ -1,6 +1,10 @@
 """Tests the exception classes."""
 
-from src.smartmeter_austria_energy.exceptions import (SmartmeterException, SmartmeterSerialException, SmartmeterTimeoutException)
+from src.smartmeter_austria_energy.exceptions import (
+    SmartmeterException,
+    SmartmeterSerialException,
+    SmartmeterTimeoutException,
+)
 
 
 def test_SmartmeterException_Is_Exception():

@@ -1,5 +1,6 @@
 """Defines the OBIS objects."""
 
+
 class Obis:
     def to_bytes(code):
         return bytes([int(a) for a in code.split(".")])

@@ -1,8 +1,9 @@
 """Tests the obisvalue classes."""
 
 import math
-from src.smartmeter_austria_energy.constants import (PhysicalUnits)
-from src.smartmeter_austria_energy.obisvalue import (ObisValueFloat, ObisValueString)
+
+from src.smartmeter_austria_energy.constants import PhysicalUnits
+from src.smartmeter_austria_energy.obisvalue import ObisValueFloat, ObisValueString
 
 
 def test_ObisvalueFloat():
@@ -24,6 +25,7 @@ def test_ObisvalueFloat():
 
     assert my_obisvalue.Value == my_raw_value * 10**my_scale
     assert my_obisvalue.ValueString == f"{my_obisvalue.Value} {my_obisvalue.Unit.name}"
+
 
 def test_ObisvalueFloat_add_matching_unit():
     """Test the ObisValueFloat class add method."""
@@ -48,6 +50,7 @@ def test_ObisvalueFloat_add_matching_unit():
     assert my_obisvalue.Value == my_raw_value1 * 10**my_scale1 + my_raw_value2 * 10**my_scale2
     assert my_obisvalue.ValueString == f"{my_obisvalue.Value} {my_obisvalue.Unit.name}"
 
+
 def test_ObisvalueFloat_sub_matching_unit():
     """Test the ObisValueFloat class subtract method."""
     # arrange
@@ -71,6 +74,7 @@ def test_ObisvalueFloat_sub_matching_unit():
     assert my_obisvalue.Value == my_raw_value1 * 10**my_scale1 - my_raw_value2 * 10**my_scale2
     assert my_obisvalue.ValueString == f"{my_obisvalue.Value} {my_obisvalue.Unit.name}"
 
+
 def test_ObisvalueFloat_add_not_matching_unit():
     """Test the ObisValueFloat class add method."""
     # arrange
@@ -81,7 +85,7 @@ def test_ObisvalueFloat_add_not_matching_unit():
     my_W = 0x1B
     my_unit1 = PhysicalUnits(my_Wh)
     my_unit2 = PhysicalUnits(my_W)
-        
+
     my_scale1 = -1
     my_scale2 = 4
 
@@ -96,6 +100,7 @@ def test_ObisvalueFloat_add_not_matching_unit():
     assert math.isnan(my_obisvalue.Value)
     assert my_obisvalue.ValueString == f"{my_obisvalue.Value} {my_obisvalue.Unit.name}"
 
+
 def test_ObisvalueFloat_sub_not_matching_unit():
     """Test the ObisValueFloat class subtract method."""
     # arrange
@@ -106,7 +111,7 @@ def test_ObisvalueFloat_sub_not_matching_unit():
     my_W = 0x1B
     my_unit1 = PhysicalUnits(my_Wh)
     my_unit2 = PhysicalUnits(my_W)
-        
+
     my_scale1 = 1
     my_scale2 = 0
 
@@ -120,6 +125,7 @@ def test_ObisvalueFloat_sub_not_matching_unit():
     assert my_obisvalue.Unit == PhysicalUnits.Undef
     assert math.isnan(my_obisvalue.Value)
     assert my_obisvalue.ValueString == f"{my_obisvalue.Value} {my_obisvalue.Unit.name}"
+
 
 def test_ObisvalueString():
     """Test the ObisValueString class."""

@@ -136,6 +136,7 @@ class ObisData():
     @property
     def DeviceNumber(self) -> ObisValueString:
         return self._deviceNumber
+
     @DeviceNumber.setter
     def DeviceNumber(self, deviceNumber):
         self._deviceNumber = deviceNumber
@@ -143,6 +144,7 @@ class ObisData():
     @property
     def LogicalDeviceNumber(self) -> ObisValueString:
         return self._logicalDeviceNumber
+
     @LogicalDeviceNumber.setter
     def LogicalDeviceNumber(self, logicalDeviceNumber):
         self._logicalDeviceNumber = logicalDeviceNumber
@@ -155,6 +157,7 @@ class ObisDataEventArgs(EventArgs):
     @property
     def obisdata(self) -> ObisData:
         return self._data
+
     @obisdata.setter
     def obisdata(self, data):
         self._data = data

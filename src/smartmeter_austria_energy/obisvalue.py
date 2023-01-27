@@ -1,6 +1,7 @@
 """Defines value objects for OBIS data."""
 
 import math
+
 from .constants import PhysicalUnits
 
 
@@ -23,7 +24,7 @@ class ObisValueFloat():
             return ObisValueFloat(x, self.Unit)
         else:
             return ObisValueFloat(math.nan)
-        
+
     @property
     def RawValue(self) -> float:
         return self._raw_value
@@ -52,8 +53,7 @@ class ObisValueString():
     @property
     def RawValue(self) -> str:
         return self._raw_value
-    
+
     @property
     def Value(self) -> str:
-        return self._raw_value.decode() 
-
+        return self._raw_value.decode()

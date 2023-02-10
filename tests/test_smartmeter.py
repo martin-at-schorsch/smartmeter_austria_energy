@@ -22,41 +22,6 @@ def test_smartmeter_constructor():
     assert isinstance(my_smartmeter, Smartmeter)
 
 
-def test_smartmeter_properties():
-    """Test the constructor of the smartmeter class with an empty port."""
-
-    # arrange
-    supplier_name = SUPPLIER_EVN_NAME
-    key_hex_string = "some_hex"
-    port = "anyString"
-
-    my_smartmeter = Smartmeter(supplier_name, port, key_hex_string)
-
-    # act
-    result_is_running = my_smartmeter.is_running
-
-    # assert
-    assert result_is_running is False
-
-
-def test_smartmeter_close_method():
-    """Test the constructor of the smartmeter class with an empty port."""
-
-    # arrange
-    supplier_name = SUPPLIER_EVN_NAME
-    key_hex_string = "some_hex"
-    port = "anyString"
-
-    my_smartmeter = Smartmeter(supplier_name, port, key_hex_string)
-    my_smartmeter._is_running = True
-
-    # act
-    my_smartmeter.close()
-
-    # assert
-    assert my_smartmeter.is_running is False
-
-
 def test_smartmeter_has_empty_port():
     supplier_name = SUPPLIER_EVN_NAME
     key_hex_string = "some_hex"

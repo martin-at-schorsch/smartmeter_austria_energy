@@ -39,35 +39,14 @@ class Smartmeter():
         self._interval: int = interval
         self._serial_read_chunk_size : int = serial_read_chunk_size
         self._mySerial : serial.Serial = None
-        self._obisData : ObisData = None
-        self._is_running: bool = False
         self._logger = logging.getLogger()
 
-    @property
-    def is_running(self) -> bool:
-        return self._is_running
-
-    @is_running.setter
-    def is_running(self, is_running):
-        self._is_running = is_running
-
-    @property
-    def obisData(self) -> ObisData:
-        return self._obisData
-
-    @obisData.setter
-    def obisData(self, obisData):
-        self._obisData = obisData
-
-    def close(self) -> None:
-        self.is_running = False
-
     # read method was mainly taken from https://github.com/tirolerstefan/kaifa
-    def read(self) -> None:
+    def read(self) -> ObisData:
         self.__open_serial()
 
         supplier = SUPPLIERS.get(self._supplier_name)
-        self._is_running = self._mySerial.isOpen()
+        is_running = self._mySerial.isOpen()
         self._logger.debug("Start reading from serial.")
 
         stream = b''      # filled by serial device
@@ -84,7 +63,7 @@ class Smartmeter():
 
         # "telegram fetching loop" (as long as we have found two full telegrams)
         # frame1 = first telegram (68fafa68), frame2 = second telegram (68727268)
-        while self._is_running:
+        while is_running:
             self._logger.debug("Read in chunks.")
             if (self._mySerial.inWaiting() > 0):
                 # Read in chunks. Each chunk will wait as long as specified by
@@ -132,7 +111,7 @@ class Smartmeter():
                     # check for weird result -> exit
                     if (len(frame1) == 0) or (len(frame2) == 0):
                         self._logger.debug("Exit because of weird result.")
-                        self.is_running = False
+                        is_running = False
 
                     break
 
@@ -150,9 +129,9 @@ class Smartmeter():
         dec = Decrypt(supplier, frame1, frame2, self._key_hex_string)
         dec.parse_all()
 
-        self.obisData = ObisData(dec, supplier.supplied_values)
-
+        obisData = ObisData(dec, supplier.supplied_values)
         self.__close_serial()
+        return obisData
 
     def __open_serial(self):
         try:

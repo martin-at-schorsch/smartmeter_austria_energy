@@ -1,7 +1,8 @@
 """Tests the Smartmeter class."""
 
-import threading
+import pytest
 
+from src.smartmeter_austria_energy.exceptions import SmartmeterSerialException
 from src.smartmeter_austria_energy.smartmeter import Smartmeter
 from src.smartmeter_austria_energy.supplier import SUPPLIER_EVN_NAME
 
@@ -57,24 +58,10 @@ def test_smartmeter_close_method():
 
 
 def test_smartmeter_has_empty_port():
-    """Test the read method of the smartmeter class with an empty port."""
-    event = threading.Event()
-
-    # arrange
-    def obisdata_changed(sender, args):
-        event.set()
-        return
-
     supplier_name = SUPPLIER_EVN_NAME
     key_hex_string = "some_hex"
     port = ""
 
-    # act
     my_smartmeter = Smartmeter(supplier_name, port, key_hex_string)
-    my_smartmeter.start_reading()
-    my_smartmeter.obisdata_changed += obisdata_changed
-
-    result = event.wait(10)
-
-    # assert
-    assert result is False
+    with pytest.raises(SmartmeterSerialException):
+        my_smartmeter.read()

@@ -76,8 +76,8 @@ class Decrypt:
 
     def get_obis_value(self, name) -> ObisValueFloat | ObisValueString:
         d = getattr(Obis, name)
-        if d['byte'] in self.obis_values:
-            data = self.obis_values[d['byte']]
+        if d in self.obis_values:
+            data = self.obis_values[d]
             return data
         else:
             return None

@@ -38,7 +38,8 @@ def main():
     port = "COM5"
 
     smartmeter = Smartmeter(supplier_name, port, key_hex_string)
-    obisdata = await smartmeter.async_read_once()
+    smartmeter.read()
+    my_obisdata = smartmeter.obisData
     smartmeter.close()
 
     print(f"RealEnergyIn: {my_obisdata.RealEnergyIn.ValueString}")

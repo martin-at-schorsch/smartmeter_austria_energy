@@ -1,6 +1,5 @@
 from .constants import PhysicalUnits
 from .decrypt import Decrypt
-from .eventtypes import EventArgs
 from .obisvalue import ObisValueFloat, ObisValueString
 
 
@@ -148,16 +147,3 @@ class ObisData():
     @LogicalDeviceNumber.setter
     def LogicalDeviceNumber(self, logicalDeviceNumber):
         self._logicalDeviceNumber = logicalDeviceNumber
-
-
-class ObisDataEventArgs(EventArgs):
-    def __init__(self, data: ObisData) -> None:
-        self._data = data
-
-    @property
-    def obisdata(self) -> ObisData:
-        return self._data
-
-    @obisdata.setter
-    def obisdata(self, data):
-        self._data = data

@@ -1,4 +1,5 @@
 """The Smartmeter definition."""
+import asyncio
 import binascii
 import logging
 import re
@@ -42,7 +43,7 @@ class Smartmeter():
         self._logger = logging.getLogger()
 
     # read method was mainly taken from https://github.com/tirolerstefan/kaifa
-    def read(self) -> ObisData:
+    async def async_read(self) -> ObisData:
         self.__open_serial()
 
         supplier = SUPPLIERS.get(self._supplier_name)
@@ -117,7 +118,7 @@ class Smartmeter():
 
             # Optional, but recommended: sleep once per loop to let
             # other threads on your PC run during this time.
-            time.sleep(sleep_interval)
+            await asyncio.sleep(sleep_interval)
 
             actual_time = time.monotonic()
             if (actual_time < max_stop_time):

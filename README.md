@@ -34,7 +34,7 @@ import asyncio
 from smartmeter_austria_energy.supplier import (SUPPLIER_SALZBURGNETZ_NAME)
 from smartmeter_austria_energy.smartmeter import(Smartmeter)
 
-async def main():
+async def async_main():
     supplier_name = SUPPLIER_SALZBURGNETZ_NAME
     key_hex_string = "-- this is your key --"
     port = "COM5"
@@ -46,7 +46,7 @@ async def main():
     print(f"RealEnergyOut: {my_obisdata.RealEnergyOut.ValueString}")
  
 if __name__ == '__main__':
-    main()
+    asyncio.run(async_main())
 ```
 
 Script was tested on Linux (Ubuntu, Debian, Raspberry OS) and Windows (Windows 10, Windows 11).

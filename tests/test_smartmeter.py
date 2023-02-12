@@ -2,7 +2,7 @@
 
 import pytest
 
-from src.smartmeter_austria_energy.exceptions import SmartmeterSerialException
+from src.smartmeter_austria_energy.exceptions import SmartmeterException
 from src.smartmeter_austria_energy.smartmeter import Smartmeter
 from src.smartmeter_austria_energy.supplier import SUPPLIER_EVN_NAME
 
@@ -29,5 +29,5 @@ async def test_smartmeter_has_empty_port():
     port = ""
 
     my_smartmeter = Smartmeter(supplier_name, port, key_hex_string)
-    with pytest.raises(SmartmeterSerialException):
-        await my_smartmeter.async_read()
+    with pytest.raises(SmartmeterException):
+        my_smartmeter.read()

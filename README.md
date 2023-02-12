@@ -29,24 +29,22 @@ Possible COM port settings:
 COM5, eg using Windows
 
 ```python
-import asyncio
-
 from smartmeter_austria_energy.supplier import (SUPPLIER_SALZBURGNETZ_NAME)
 from smartmeter_austria_energy.smartmeter import(Smartmeter)
 
-async def async_main():
+def main():
     supplier_name = SUPPLIER_SALZBURGNETZ_NAME
     key_hex_string = "-- this is your key --"
     port = "COM5"
 
     smartmeter = Smartmeter(supplier_name, port, key_hex_string)
-    my_obisdata = await smartmeter.async_read()
+    my_obisdata = smartmeter.read()
 
     print(f"RealEnergyIn: {my_obisdata.RealEnergyIn.ValueString}")
     print(f"RealEnergyOut: {my_obisdata.RealEnergyOut.ValueString}")
  
 if __name__ == '__main__':
-    asyncio.run(async_main())
+    main()
 ```
 
 Script was tested on Linux (Ubuntu, Debian, Raspberry OS) and Windows (Windows 10, Windows 11).

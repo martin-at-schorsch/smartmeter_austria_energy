@@ -1,5 +1,4 @@
 """The Smartmeter definition."""
-import asyncio
 import binascii
 import logging
 import re
